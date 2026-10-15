@@ -1,0 +1,116 @@
+name: Percussion Mini
+status: active
+category: massage
+needs:
+  - after-training
+  - long-day
+  - travel
+order: 2
+tagline: A small massage gun with a warm and cool head.
+summary: A 1.4 lb massage gun with a brushless motor, three speeds, and a head that can warm or cool. For temporary relief of minor muscle aches.
+price: 199
+buyUrl: ''
+variants:
+  - name: Dark Grey
+    swatch: '#3A3D42'
+    available: true
+  - name: White
+    swatch: '#EDEDEA'
+    available: true
+images:
+  - image: ''
+    alt: Percussion Mini, side view
+    shot: Massage gun on dark stone, warm lamp, hand nearby for scale
+  - image: ''
+    alt: Percussion Mini on a calf
+    shot: Man 40s on a sofa, device on the calf, evening lamp
+  - image: ''
+    alt: Warm and cool head close up
+    shot: Head attachment on walnut, evening light
+  - image: ''
+    alt: Percussion Mini in its case
+    shot: Open case on a hotel desk, carry-on in the background
+specChips:
+  - 1.4 lb
+  - Warm + cool head
+  - 3 to 5 hr battery
+  - Brushless
+benefits:
+  - title: Small enough to finish
+    text: 1.4 lb (620 g). Short sessions, then it goes back in the case.
+  - title: Warm or cool
+    text: One head warms to 95 to 113 °F (35 to 45 °C) or cools to 50 to 68 °F (10 to 20 °C).
+  - title: Three speeds
+    text: 2,800 to 3,200 rpm. Amplitude 0.31 in (8 mm). A brushless motor.
+  - title: Temporary relief
+    text: For temporary relief of minor muscle aches. Large muscles only.
+  - title: No subscription
+    text: No app. Buy it once.
+inTheBox:
+  - 'TBD: Percussion Mini'
+  - 'TBD: 5 heads'
+  - 'TBD: carry case'
+  - 'TBD: USB-C cable'
+  - 'TBD: manual'
+howToUse:
+  - title: Pick a head and a speed
+    text: Start on the low speed. Use the warm and cool head only on large muscles.
+  - title: Keep it moving
+    text: Glide over the muscle. Do not park it on a bone, joint, or the spine.
+  - title: Stop when the timer does
+    text: 'It shuts off at 15 minutes. TBD: max 2 minutes on one spot.'
+specs:
+  - group: Massage
+    label: Weight
+    value: 1.4 lb (620 g)
+  - group: Massage
+    label: Motor
+    value: Brushless
+  - group: Massage
+    label: Speeds
+    value: 3 speeds, 2,800 to 3,200 rpm
+  - group: Massage
+    label: Amplitude
+    value: 0.31 in (8 mm)
+  - group: Massage
+    label: Heads
+    value: 5 heads (4 standard, 1 warm and cool)
+  - group: Temperature
+    label: Warm head
+    value: 95 to 113 °F (35 to 45 °C)
+  - group: Temperature
+    label: Cool head
+    value: 50 to 68 °F (10 to 20 °C)
+  - group: Power
+    label: Battery
+    value: 2,400 mAh, about 3 to 5 hours
+  - group: Power
+    label: Auto shut-off
+    value: 15 min
+  - group: Power
+    label: Noise
+    value: 'TBD: confirm from sample'
+  - group: Power
+    label: Charging
+    value: 'TBD: USB-C'
+faq:
+  - q: Where should I use it?
+    a: Large muscles such as calves, quads, glutes, and the muscles of the back away from the spine. Not the front of the neck, the head, the spine, or joints.
+  - q: How hot does the head get?
+    a: The warm range is 95 to 113 °F (35 to 45 °C). The cool range is 50 to 68 °F (10 to 20 °C).
+  - q: Do I need an app?
+    a: No. There is no app and no subscription.
+  - q: What is it for?
+    a: Temporary relief of minor muscle aches. It is a short session, then you stop.
+precautions:
+  - Do not use on the front of the neck, the head, the spine, or joints.
+  - Do not use on bruises or broken skin.
+  - Pregnant, or have a health condition? Ask your doctor first.
+  - 'TBD: max 2 minutes per spot.'
+  - Not for children.
+bundle: recovery-kit
+related:
+  - recovery-light
+  - heated-eye-mask
+seoTitle: Percussion Mini, heated massage gun
+seoDescription: A 1.4 lb massage gun with a warm and cool head, three speeds, and no subscription.

@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getSettings } from '../lib/catalog';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  const policies = await getCollection('policies');
+  return [
+    ...pages.map((entry) => ({ params: { page: entry.id }, props: { kind: 'page' as const, id: entry.id } })),
+    ...policies.map((entry) => ({ params: { page: entry.id }, props: { kind: 'policy' as const, id: entry.id } })),
+  ];
+}
+
+interface Props {
+  kind: 'page' | 'policy';
+  id: string;
+}
+
+const { kind, id } = Astro.props;
+const collection = kind === 'policy' ? 'policies' : 'pages';
+const entries = await getCollection(collection);
+const entry = entries.find((item) => item.id === id);
+if (!entry) throw new Error(`Missing ${collection} entry ${id}`);
+const { Content } = await render(entry);
+const settings = await getSettings();
+---
+
+<Base title={entry.data.title} description={entry.data.description}>
+  <article class="section section-light">
+    <div class="wrap prose page-intro">
+      {kind === 'policy' && settings.draft && <p class="draft-note">DRAFT: needs review.</p>}
+      <h1>{entry.data.title}</h1>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>

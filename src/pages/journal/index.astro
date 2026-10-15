@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Shot from '../../components/Shot.astro';
+import { formatDate } from '../../lib/format';
+import { getSettings } from '../../lib/catalog';
+
+const settings = await getSettings();
+const posts = (await getCollection('journal')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const draft = settings.draft;
+---
+
+<Base title="Journal" description="Plain notes on red light, massage guns, and a short wind-down for desk days.">
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <p class="eyebrow">Notes</p>
+      <h1>Journal</h1>
+      <p class="lede">How to use the devices, where not to put a massage gun, and a 20 minute desk-day routine. No lab coats.</p>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="wrap stack">
+      {
+        posts.map((post) => (
+          <article class="card" style="display:grid">
+            <a href={`/journal/${post.id}/`}>
+              <Shot image={post.data.image} alt={post.data.alt} shot={post.data.shot} draft={draft} shape="journal" kind="generic" sizes="(min-width: 800px) 720px, 100vw" />
+            </a>
+            <div class="card-body">
+              <p class="eyebrow">{formatDate(post.data.date)}</p>
+              <h2><a href={`/journal/${post.id}/`}>{post.data.title}</a></h2>
+              <p class="muted">{post.data.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Base>

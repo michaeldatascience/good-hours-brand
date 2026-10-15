@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import Tbd from './Tbd.astro';
+
+interface Item {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  items: Item[];
+  draft: boolean;
+  compact?: boolean;
+}
+
+const { items, draft, compact = false } = Astro.props;
+---
+
+{
+  compact ? (
+    <ul class="trust-compact">
+      {items.map((item) => (
+        <li>
+          <Icon name={item.icon} size={18} />
+          <span>
+            <Tbd value={item.title} draft={draft} />
+          </span>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="trust-grid">
+      {items.map((item) => (
+        <article class="card trust-item">
+          <Icon name={item.icon} />
+          <h3>
+            <Tbd value={item.title} draft={draft} />
+          </h3>
+          <p class="muted">
+            <Tbd value={item.text} draft={draft} />
+          </p>
+        </article>
+      ))}
+    </div>
+  )
+}

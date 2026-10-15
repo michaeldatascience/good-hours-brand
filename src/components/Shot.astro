@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import Placeholder from './Placeholder.astro';
+
+interface Props {
+  image?: unknown;
+  alt: string;
+  shot?: string;
+  draft?: boolean;
+  shape?: 'product' | 'hero' | 'card' | 'journal';
+  kind?: 'light' | 'gun' | 'mask' | 'bundle' | 'generic';
+  sizes?: string;
+  widths?: number[];
+  bare?: boolean;
+}
+
+const { image, alt, shot = '', draft = false, shape = 'card', kind = 'generic', sizes, widths, bare = false } = Astro.props;
+const real = !!image && typeof image === 'object' && image !== null && 'src' in image;
+---
+
+<figure class="shot" style={bare ? 'display:contents' : undefined}>
+  {
+    real ? (
+      <Image
+        src={image as any}
+        alt={alt}
+        format="webp"
+        widths={widths ?? [480, 800, 1200]}
+        sizes={sizes ?? '(min-width: 900px) 560px, 100vw'}
+      />
+    ) : (
+      <Placeholder shape={shape} kind={kind} shot={shot} draft={draft} alt={alt} />
+    )
+  }
+  {real && draft && shot && <figcaption class="shot-caption">PHOTO: {shot}</figcaption>}
+</figure>

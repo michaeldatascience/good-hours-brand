@@ -1,0 +1,48 @@
+---
+import Shot from './Shot.astro';
+
+interface ShotItem {
+  image?: unknown;
+  alt: string;
+  shot: string;
+}
+
+interface Props {
+  images: ShotItem[];
+  draft: boolean;
+  kind?: 'light' | 'gun' | 'mask' | 'bundle' | 'generic';
+}
+
+const { images, draft, kind = 'generic' } = Astro.props;
+---
+
+<div class="gallery" data-gallery>
+  <div class="gallery-stage">
+    {
+      images.map((image, index) => (
+        <div class="gallery-slide" data-slide hidden={index !== 0}>
+          <Shot
+            image={image.image}
+            alt={image.alt}
+            shot={image.shot}
+            draft={draft}
+            shape="product"
+            kind={kind}
+            sizes="(min-width: 900px) 520px, 100vw"
+          />
+        </div>
+      ))
+    }
+  </div>
+  {
+    images.length > 1 && (
+      <div class="gallery-thumbs">
+        {images.map((image, index) => (
+          <button type="button" data-thumb={index} aria-current={index === 0 ? 'true' : 'false'} aria-label={image.alt}>
+            <Shot image={image.image} alt="" shot="" draft={false} shape="card" kind={kind} widths={[160, 240]} sizes="72px" bare />
+          </button>
+        ))}
+      </div>
+    )
+  }
+</div>

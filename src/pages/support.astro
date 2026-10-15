@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import FaqList from '../components/FaqList.astro';
+import Tbd from '../components/Tbd.astro';
+import { getFaqs, getSettings } from '../lib/catalog';
+
+const settings = await getSettings();
+const faqs = await getFaqs();
+const draft = settings.draft;
+---
+
+<Base title="Support" description="Shipping, use, warranty, and safety questions for Good Hours devices.">
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <p class="eyebrow">Help</p>
+      <h1>Support</h1>
+      <p class="lede">Answers we can stand behind today. Where a number is still open, it is marked.</p>
+    </div>
+  </section>
+  {
+    faqs.groups.map((group, index) => (
+      <section class:list={['section', index % 2 === 0 ? 'section-light' : 'section-dark']}>
+        <div class="wrap stack">
+          <h2>{group.title}</h2>
+          <FaqList items={group.items} draft={draft} />
+        </div>
+      </section>
+    ))
+  }
+  <section class="section section-light">
+    <div class="wrap stack">
+      <h2>Manuals</h2>
+      <p><Tbd value={faqs.manuals} draft={draft} /></p>
+      <h2>Warranty</h2>
+      <p><Tbd value={faqs.warrantyNote} draft={draft} /></p>
+      <p><a href="/warranty/">Warranty page</a></p>
+      <p><a class="btn" href="/contact/">Contact support</a></p>
+    </div>
+  </section>
+</Base>

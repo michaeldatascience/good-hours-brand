@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import CompareTable from '../components/CompareTable.astro';
+import Tbd from '../components/Tbd.astro';
+import { getCompare, getProducts, getSettings } from '../lib/catalog';
+
+const settings = await getSettings();
+const compare = await getCompare();
+const products = await getProducts();
+const draft = settings.draft;
+---
+
+<Base title={compare.title} description={compare.description}>
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <p class="eyebrow">Specs</p>
+      <h1>{compare.title}</h1>
+      <p class="lede"><Tbd value={compare.intro} draft={draft} /></p>
+    </div>
+  </section>
+  {
+    compare.tables.map((table, index) => {
+      const product = products.find((item) => item.id === table.product);
+      return (
+        <section class:list={['section', index % 2 === 0 ? 'section-light' : 'section-dark']}>
+          <div class="wrap stack">
+            <h2>
+              {product?.data.status === 'active' ? (
+                <a href={`/products/${product.id}/`}>{product.data.name}</a>
+              ) : (
+                product?.data.name ?? table.product
+              )}
+            </h2>
+            <CompareTable name={product?.data.name ?? 'Good Hours'} rows={table.rows} draft={draft} />
+          </div>
+        </section>
+      );
+    })
+  }
+  <section class="section section-dark">
+    <div class="wrap">
+      <p class="muted"><Tbd value={compare.footnote} draft={draft} /></p>
+    </div>
+  </section>
+</Base>

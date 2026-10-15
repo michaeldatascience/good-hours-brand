@@ -1,0 +1,211 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Gallery from '../../components/Gallery.astro';
+import BuyButton from '../../components/BuyButton.astro';
+import Price from '../../components/Price.astro';
+import Tbd from '../../components/Tbd.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import SpecsTable from '../../components/SpecsTable.astro';
+import FaqList from '../../components/FaqList.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getProducts, getSettings, getBundles } from '../../lib/catalog';
+import { categoryLabel } from '../../lib/labels';
+import { formatUsd, savingsAmount, stripTbd } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products
+    .filter((product) => product.data.status === 'active')
+    .map((product) => ({ params: { slug: product.id }, props: { product } }));
+}
+
+interface Props {
+  product: CollectionEntry<'products'>;
+}
+
+const { product } = Astro.props;
+const settings = await getSettings();
+const allProducts = await getProducts();
+const bundles = await getBundles();
+const draft = settings.draft;
+const data = product.data;
+const kind = data.category === 'red-light' ? 'light' : data.category === 'massage' ? 'gun' : 'mask';
+const bundle = data.bundle ? bundles.find((item) => item.id === data.bundle && item.data.status === 'active') : undefined;
+const bundleProducts = bundle
+  ? bundle.data.items
+      .map((id) => allProducts.find((item) => item.id === id))
+      .filter((item): item is NonNullable<typeof item> => !!item)
+  : [];
+const bundlePrices = bundleProducts.map((item) => item.data.price).filter((price): price is number => price != null);
+const saved =
+  bundle && bundlePrices.length === bundleProducts.length ? savingsAmount(bundlePrices, bundle.data.price) : 0;
+const related = data.related
+  .map((id) => allProducts.find((item) => item.id === id && item.data.status === 'active'))
+  .filter((item): item is NonNullable<typeof item> => !!item);
+const firstImage = data.images.find((image) => image.image && typeof image.image === 'object' && 'src' in image.image);
+const imageUrl =
+  firstImage?.image && typeof firstImage.image === 'object' && 'src' in firstImage.image
+    ? new URL(String(firstImage.image.src), Astro.site).href
+    : undefined;
+const jsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: data.name,
+  description: data.seoDescription || data.summary,
+  brand: { '@type': 'Brand', name: settings.brandName },
+};
+if (imageUrl) jsonLd.image = [imageUrl];
+const title = data.seoTitle || data.name;
+const description = data.seoDescription || data.summary;
+---
+
+<Base title={title} description={description} jsonLd={jsonLd} buyBar={true}>
+  <div class="section-dark">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/products/">Products</a>
+        <span>/</span>
+        <span>{data.name}</span>
+      </nav>
+      <div class="product-top" style="padding-bottom: 64px">
+        <Gallery images={data.images} draft={draft} kind={kind} />
+        <div class="product-info">
+          <p class="eyebrow">{categoryLabel[data.category]}</p>
+          <h1>{data.name}</h1>
+          <p><Tbd value={data.tagline} draft={draft} /></p>
+          {data.price != null && <Price amount={data.price} />}
+          <div class="chips">
+            {data.specChips.map((chip) => (
+              <span class="chip"><Tbd value={chip} draft={draft} /></span>
+            ))}
+          </div>
+          <div data-swatches>
+            <p>Color: <span data-swatch-name><Tbd value={data.variants[0].name} draft={draft} /></span></p>
+            <div class="swatches">
+              {data.variants.map((variant, index) => (
+                <button
+                  type="button"
+                  class="swatch"
+                  data-swatch
+                  data-name={draft ? variant.name : stripTbd(variant.name)}
+                  style={`--swatch: ${variant.swatch}`}
+                  aria-pressed={index === 0 ? 'true' : 'false'}
+                  aria-label={variant.name}
+                  disabled={!variant.available}
+                />
+              ))}
+            </div>
+          </div>
+          <BuyButton buyUrl={data.buyUrl} />
+          <TrustStrip items={settings.trustStrip} draft={draft} compact />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section section-light">
+    <div class="wrap stack">
+      <h2>Why this one</h2>
+      <div class="grid-2">
+        {data.benefits.map((benefit) => (
+          <article class="card card-body">
+            <h3><Tbd value={benefit.title} draft={draft} /></h3>
+            <p class="muted"><Tbd value={benefit.text} draft={draft} /></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {bundle && (
+    <section class="section section-dark">
+      <div class="wrap">
+        <article class="card card-body">
+          <p class="eyebrow">Save with the kit</p>
+          <h2><a href={`/bundles/${bundle.id}/`}>{bundle.data.name}</a></h2>
+          <p><Tbd value={bundle.data.tagline} draft={draft} /></p>
+          <p>{bundleProducts.map((item) => item.data.name).join(' + ')}</p>
+          <Price amount={bundle.data.price} />
+          {saved > 0 && <p class="save">You save {formatUsd(saved)}</p>}
+          <p><a class="btn" href={`/bundles/${bundle.id}/`}>See the kit</a></p>
+        </article>
+      </div>
+    </section>
+  )}
+
+  <section class:list={['section', bundle ? 'section-light' : 'section-dark']}>
+    <div class="wrap stack">
+      <h2>In the box</h2>
+      <ul>
+        {data.inTheBox.map((item) => (
+          <li><Tbd value={item} draft={draft} /></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class:list={['section', bundle ? 'section-dark' : 'section-light']}>
+    <div class="wrap stack">
+      <h2>How to use it</h2>
+      <ol class="steps">
+        {data.howToUse.map((step) => (
+          <li>
+            <span>
+              <strong><Tbd value={step.title} draft={draft} /></strong>
+              <br />
+              <Tbd value={step.text} draft={draft} />
+            </span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class:list={['section', bundle ? 'section-light' : 'section-dark']}>
+    <div class="wrap stack">
+      <h2>Specs</h2>
+      <SpecsTable rows={data.specs} draft={draft} />
+    </div>
+  </section>
+
+  <section class:list={['section', bundle ? 'section-dark' : 'section-light']}>
+    <div class="wrap stack">
+      <h2>Questions</h2>
+      <FaqList items={data.faq} draft={draft} />
+    </div>
+  </section>
+
+  <section class:list={['section', bundle ? 'section-light' : 'section-dark']}>
+    <div class="wrap stack">
+      <h2>Precautions</h2>
+      <ul>
+        {data.precautions.map((item) => (
+          <li><Tbd value={item} draft={draft} /></li>
+        ))}
+      </ul>
+      <p><a href="/safety/">Read the safety page</a></p>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class:list={['section', bundle ? 'section-dark' : 'section-light']}>
+      <div class="wrap stack">
+        <h2>Related</h2>
+        <div class="grid-3">
+          {related.map((item) => <ProductCard product={item} draft={draft} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <div slot="buybar" class="buy-bar">
+    <div class="buy-bar-copy">
+      <div class="buy-bar-name">{data.name}</div>
+      {data.price != null && <Price amount={data.price} />}
+    </div>
+    <BuyButton buyUrl={data.buyUrl} />
+  </div>
+</Base>

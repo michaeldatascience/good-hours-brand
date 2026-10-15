@@ -1,0 +1,93 @@
+name: Heated Eye Mask
+status: active
+category: sleep
+needs:
+  - before-bed
+  - travel
+order: 3
+tagline: Warmth and gentle pressure for the last ten minutes of your day.
+summary: A heated eye mask with air pressure and vibration for the end of the evening. Thermostat controlled, rechargeable, and easy to pack.
+price: 119
+buyUrl: ""
+variants:
+  - name: "TBD: Black"
+    swatch: "#1C1E22"
+    available: true
+images:
+  - alt: Heated Eye Mask folded on linen
+    shot: Mask on linen, warm lamp, bedside table
+  - alt: Heated Eye Mask worn while resting
+    shot: Woman 40s on a sofa, mask on, warm lamp, evening
+  - alt: Heated Eye Mask in a carry-on
+    shot: Mask tucked in a carry-on, hotel room, evening light
+specChips:
+  - "TBD: Warmth"
+  - "TBD: Air pressure"
+  - "TBD: Auto-off"
+  - "TBD: Rechargeable"
+benefits:
+  - title: The last ten minutes
+    text: Warmth and gentle pressure after the day is done. Lie down. Let it run.
+  - title: More than heat
+    text: Air pressure and vibration sit with the warmth. Keep both low the first night.
+  - title: Controlled warmth
+    text: Thermostat controlled. It should feel warm, not hot. Stop if it does not.
+  - title: No subscription
+    text: No app. One purchase. Pack it when you travel.
+inTheBox:
+  - "TBD: Heated Eye Mask"
+  - "TBD: USB-C cable"
+  - "TBD: storage pouch"
+  - "TBD: manual"
+howToUse:
+  - title: Charge it first
+    text: "TBD: confirm the charge port and time from the sample. Start with a full charge."
+  - title: Lie down and fit it
+    text: Dim the room. Settle the mask so it feels even. Start on the lowest warmth.
+  - title: Let it end the night
+    text: About 10 minutes. Do not walk around in it. Take it off when it stops, or sooner.
+specs:
+  - group: Warmth
+    label: Temperature
+    value: "TBD: confirm from sample"
+  - group: Warmth
+    label: Control
+    value: Thermostat controlled
+  - group: Feel
+    label: Air pressure
+    value: "TBD: confirm from sample"
+  - group: Feel
+    label: Vibration
+    value: "TBD: confirm from sample"
+  - group: Power
+    label: Battery
+    value: "TBD: confirm from sample"
+  - group: Power
+    label: Auto-off
+    value: "TBD: confirm from sample"
+  - group: Build
+    label: Weight
+    value: "TBD: confirm from sample"
+  - group: Build
+    label: Size
+    value: "TBD: confirm from sample"
+faq:
+  - q: Will this make me sleep?
+    a: It is warmth and gentle pressure for a wind-down routine. We do not promise sleep.
+  - q: Do I need an app?
+    a: No. There is no app and no subscription.
+  - q: Can I take it on a trip?
+    a: "TBD: battery details from the sample. It is soft and sized for a carry-on. Check airline rules."
+  - q: Can I change the warmth?
+    a: "TBD: confirm the controls from the sample. It is thermostat controlled."
+precautions:
+  - For relaxation and a sleep routine only.
+  - Ask your doctor first if you are pregnant, have an implanted device, or have a health condition.
+  - Stop if it feels too hot. Do not use it while driving.
+  - Not for children.
+bundle: wind-down-kit
+related:
+  - recovery-light
+  - percussion-mini
+seoTitle: Heated Eye Mask for an evening wind-down
+seoDescription: Warmth, gentle air pressure, and vibration for the last minutes of the day. No subscription.

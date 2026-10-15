@@ -1,0 +1,36 @@
+:root {
+  --charcoal: #16181c;
+  --charcoal-2: #22252b;
+  --paper: #f3eee6;
+  --paper-2: #e9e2d6;
+  --ember: #c4512f;
+  --ember-hover: #ae4527;
+  --ember-text: #a23f26;
+  --ember-soft: #e07650;
+  --sand: #cbb89a;
+  --slate: #5b6168;
+  --mist: #a7abb1;
+  --tbd: #ffe58a;
+  --white: #ffffff;
+  --font: "Manrope Variable", "Manrope", sans-serif;
+  --serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, serif;
+  --title: 40px;
+  --section: 26px;
+  --body: 16px;
+  --label: 12px;
+  --section-space: 64px;
+  --header: 72px;
+  --line-light: rgba(22, 24, 28, 0.14);
+  --line-dark: rgba(243, 238, 230, 0.16);
+  --max: 1200px;
+  --radius: 12px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --title: 56px;
+    --section: 32px;
+    --body: 17px;
+    --section-space: 96px;
+  }
+}

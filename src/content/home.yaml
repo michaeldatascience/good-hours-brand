@@ -1,0 +1,77 @@
+hero:
+  eyebrow: Recovery gadgets
+  heading: Your 15 minutes.
+  subheading: Red light, heat and massage for the end of the day. One price, no subscription.
+  buttonLabel: Shop the gear
+  buttonLink: /products/
+  image:
+    alt: Good Hours gadgets on a walnut table in evening light
+    shot: Three devices on walnut, warm lamp, red glow, evening
+products:
+  heading: Three tools. One evening routine.
+  intro: A handheld red light, a heated mini massage gun, and a heated eye mask. Each one has a one-time price. None of them need an app.
+routines:
+  heading: Pick your 15 minutes.
+  items:
+    - need: after-training
+      title: After training
+      minutes: 15
+      product: percussion-mini
+      steps:
+        - Use the Percussion Mini on large muscles for a few minutes per area.
+        - Switch to the Recovery Light. Strap it on, set 10 minutes, wear the goggles.
+        - Sit down. Let the timer end the session.
+    - need: long-day
+      title: After a long day
+      minutes: 10
+      product: recovery-light
+      steps:
+        - Sit somewhere you can lean back.
+        - Recovery Light on the shoulders or legs, 10 minutes, goggles on.
+        - If your legs feel tight, a short pass with the Percussion Mini.
+    - need: before-bed
+      title: Before bed
+      minutes: 20
+      product: heated-eye-mask
+      steps:
+        - Dim the room. Leave the inbox alone.
+        - Recovery Light for 10 minutes if you want it.
+        - Heated eye mask for the last 10. It should feel warm, not hot.
+    - need: travel
+      title: In the bag
+      minutes: 15
+      product: recovery-light
+      steps:
+        - Pack the Recovery Light and goggles in a carry-on.
+        - In the hotel, use the same timer you use at home.
+        - The Percussion Mini fits beside it if you have the room.
+howItWorks:
+  heading: How it works, in plain words.
+  items:
+    - icon: sun
+      title: Red light
+      text: The Recovery Light uses 630, 660, 830 and 850 nm. Two modes, one button, and a timer that turns it off.
+    - icon: thermometer
+      title: Warmth
+      text: The eye mask heats up and stays controlled. The massage gun head can warm or cool. Warmth is for winding down.
+    - icon: waves
+      title: Percussion
+      text: A small brushless motor and three speeds. For temporary relief of minor muscle aches, then you stop.
+compare:
+  heading: Specs, side by side.
+  intro: The Recovery Light next to typical premium and typical budget ranges. No brand names. Market numbers are still being checked.
+bundles:
+  heading: Kits, if you want both.
+  intro: Pair two devices and pay less than the separate prices. The savings number is the two prices minus the kit price.
+faq:
+  heading: Straight answers.
+  questions:
+    - Do I need an app?
+    - Where do you ship?
+    - What if I change my mind?
+    - Who should ask a doctor first?
+closing:
+  heading: Your evenings back.
+  text: Fifteen minutes after you train, after the commute, or before you sleep. Clear specs. One price. No subscription.
+  buttonLabel: See all products
+  buttonLink: /products/

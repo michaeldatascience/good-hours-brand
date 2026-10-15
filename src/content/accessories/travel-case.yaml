@@ -1,0 +1,11 @@
+name: Travel Case
+status: active
+order: 2
+fits:
+  - recovery-light
+  - percussion-mini
+summary: A soft case sized for the Recovery Light and the Percussion Mini. Made to ride in a carry-on.
+price: 25
+buyUrl: ""
+alt: Travel case open with the Recovery Light and Percussion Mini
+shot: Open case in a hotel room, both devices inside, warm lamp

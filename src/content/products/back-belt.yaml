@@ -1,0 +1,71 @@
+name: Back Belt
+status: coming-soon
+category: red-light
+needs:
+  - long-day
+  - after-training
+order: 4
+tagline: Cordless red light for your lower back.
+summary: A wrap of red light for the end of a long day. Cordless, with 60 LEDs. Not for sale yet.
+variants:
+  - name: "TBD: Graphite"
+    swatch: "#3A3D42"
+    available: false
+images:
+  - alt: Back Belt concept, front view
+    shot: Belt laid flat on dark stone, red glow, evening lamp
+  - alt: Back Belt worn at a desk
+    shot: Man 50s at a home desk, belt at the lower back, warm lamp
+specChips:
+  - 60 LEDs
+  - 660 + 880 nm
+  - Cordless
+  - 1,800 mAh
+benefits:
+  - title: Aimed at the lower back
+    text: A wrap, not a handheld. You wear it and sit.
+  - title: Two wavelengths
+    text: 660 and 880 nm, with 60 LEDs. Cordless.
+  - title: Not for sale yet
+    text: This card is a preview. There is no buy link and no product page.
+inTheBox:
+  - "TBD: Back Belt"
+  - "TBD: charger"
+  - "TBD: manual"
+howToUse:
+  - title: Wait for the real steps
+    text: The routine is not final. This page is only a preview card.
+  - title: Expect a sit-down session
+    text: The idea is a cordless wrap you wear while seated.
+  - title: Same house rules
+    text: Goggles or eye notes will be confirmed before it ships. Not for children.
+specs:
+  - group: Light
+    label: LEDs
+    value: 60 LEDs
+  - group: Light
+    label: Wavelengths
+    value: 660 + 880 nm
+  - group: Power
+    label: Battery
+    value: 1,800 mAh
+  - group: Build
+    label: Use
+    value: Cordless
+  - group: Build
+    label: Weight
+    value: "TBD: confirm from sample"
+faq:
+  - q: Can I buy it?
+    a: No. It is coming later. The card on the products page is the only public note.
+  - q: What wavelengths does it use?
+    a: 660 and 880 nm, with 60 LEDs. Other numbers are still open.
+  - q: Will it need an app?
+    a: No app is planned. No subscription.
+precautions:
+  - Not for sale and not for use yet.
+  - Ask a doctor first if you are pregnant, have an implanted device, or have a health condition.
+  - Not for children.
+related: []
+seoTitle: Back Belt, coming soon
+seoDescription: Cordless red light wrap for the lower back. 60 LEDs, 660 and 880 nm. Not for sale yet.

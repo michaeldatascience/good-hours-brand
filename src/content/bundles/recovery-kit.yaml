@@ -1,0 +1,31 @@
+name: Recovery Kit
+status: active
+order: 1
+tagline: Light and massage. The full after-training routine.
+summary: Recovery Light and Percussion Mini together. Use the gun, then sit with the light. One kit price, no subscription.
+items:
+  - recovery-light
+  - percussion-mini
+price: 399
+buyUrl: ""
+images:
+  - alt: Recovery Kit on a walnut desk
+    shot: Recovery Light and Percussion Mini together on walnut, warm lamp, red glow
+  - alt: Recovery Kit in a carry-on
+    shot: Both devices in an open carry-on, hotel room, evening
+whyTogether:
+  - title: One routine, two tools
+    text: Loosen up with the Percussion Mini, then sit with the Recovery Light. About 15 minutes.
+  - title: A lower price than both
+    text: The kit costs less than the two prices added up. The page shows the difference.
+  - title: No extra accounts
+    text: No app for either device. No subscription for the kit.
+faq:
+  - q: What is in the kit?
+    a: The Recovery Light and the Percussion Mini. Boxes and parts match each product page.
+  - q: How much do I save?
+    a: The page subtracts the kit price from the two product prices. That number is the savings.
+  - q: Do I need an app?
+    a: No. There is no app and no subscription.
+seoTitle: Recovery Kit, light and massage
+seoDescription: Recovery Light and Percussion Mini in one kit. A lower price than buying both. No subscription.

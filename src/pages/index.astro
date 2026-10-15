@@ -1,0 +1,171 @@
+---
+import Base from '../layouts/Base.astro';
+import Shot from '../components/Shot.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import ProductCard from '../components/ProductCard.astro';
+import BundleCard from '../components/BundleCard.astro';
+import CompareTable from '../components/CompareTable.astro';
+import FaqList from '../components/FaqList.astro';
+import Icon from '../components/Icon.astro';
+import Tbd from '../components/Tbd.astro';
+import {
+  findFaq,
+  findProduct,
+  getActiveBundles,
+  getActiveProducts,
+  getCompare,
+  getFaqs,
+  getHome,
+  getProducts,
+  getSettings,
+  productHref,
+} from '../lib/catalog';
+
+const settings = await getSettings();
+const home = await getHome();
+const products = await getActiveProducts();
+const allProducts = await getProducts();
+const bundles = await getActiveBundles();
+const faqs = await getFaqs();
+const compare = await getCompare();
+const draft = settings.draft;
+const lightTable = compare.tables.find((table) => table.product === 'recovery-light') ?? compare.tables[0];
+const lightProduct = findProduct(allProducts, lightTable?.product ?? '');
+const picked = home.faq.questions
+  .map((question) => findFaq(faqs, question))
+  .filter((item): item is { q: string; a: string } => !!item);
+---
+
+<Base title={settings.seoTitle} description={settings.seoDescription}>
+  <section class="section section-dark">
+    <div class="wrap hero-grid">
+      <div class="hero-copy fade-in">
+        <p class="eyebrow"><Tbd value={home.hero.eyebrow} draft={draft} /></p>
+        <hr class="rule" />
+        <h1><Tbd value={home.hero.heading} draft={draft} /></h1>
+        <p class="lede"><Tbd value={home.hero.subheading} draft={draft} /></p>
+        <p><a class="btn" href={home.hero.buttonLink}>{home.hero.buttonLabel}</a></p>
+      </div>
+      <Shot
+        image={home.hero.image.image}
+        alt={home.hero.image.alt}
+        shot={home.hero.image.shot}
+        draft={draft}
+        shape="hero"
+        kind="bundle"
+        sizes="(min-width: 900px) 560px, 100vw"
+      />
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap">
+      <TrustStrip items={settings.trustStrip} draft={draft} />
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <div>
+        <h2><Tbd value={home.products.heading} draft={draft} /></h2>
+        <p class="lede"><Tbd value={home.products.intro} draft={draft} /></p>
+      </div>
+      <div class="grid-3">
+        {products.map((product) => <ProductCard product={product} draft={draft} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap stack">
+      <h2><Tbd value={home.routines.heading} draft={draft} /></h2>
+      <div class="grid-2">
+        {
+          home.routines.items.map((item) => {
+            const product = findProduct(allProducts, item.product);
+            return (
+              <article class="card card-body">
+                <p class="eyebrow">{item.minutes} min</p>
+                <h3>{item.title}</h3>
+                <ol class="steps">
+                  {item.steps.map((step) => (
+                    <li>
+                      <span>
+                        <Tbd value={step} draft={draft} />
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                {product && (
+                  <p>
+                    <a href={productHref(product)}>{product.data.name}</a>
+                  </p>
+                )}
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <h2><Tbd value={home.howItWorks.heading} draft={draft} /></h2>
+      <div class="grid-3">
+        {
+          home.howItWorks.items.map((item) => (
+            <article class="card card-body">
+              <Icon name={item.icon} />
+              <h3>{item.title}</h3>
+              <p class="muted">
+                <Tbd value={item.text} draft={draft} />
+              </p>
+            </article>
+          ))
+        }
+      </div>
+      <p><a href="/how-it-works/">Read the longer version</a></p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap stack">
+      <div>
+        <h2><Tbd value={home.compare.heading} draft={draft} /></h2>
+        <p class="lede"><Tbd value={home.compare.intro} draft={draft} /></p>
+      </div>
+      {lightTable && <CompareTable name={lightProduct?.data.name ?? 'Good Hours'} rows={lightTable.rows} draft={draft} />}
+      <p class="muted"><Tbd value={compare.footnote} draft={draft} /></p>
+      <p><a href="/compare/">See every device</a></p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <div>
+        <h2><Tbd value={home.bundles.heading} draft={draft} /></h2>
+        <p class="lede"><Tbd value={home.bundles.intro} draft={draft} /></p>
+      </div>
+      <div class="grid-2">
+        {bundles.map((bundle) => <BundleCard bundle={bundle} products={allProducts} draft={draft} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap stack">
+      <h2><Tbd value={home.faq.heading} draft={draft} /></h2>
+      <FaqList items={picked} draft={draft} />
+      <p><a href="/support/">All questions</a></p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <h2><Tbd value={home.closing.heading} draft={draft} /></h2>
+      <p class="lede"><Tbd value={home.closing.text} draft={draft} /></p>
+      <p><a class="btn" href={home.closing.buttonLink}>{home.closing.buttonLabel}</a></p>
+    </div>
+  </section>
+</Base>

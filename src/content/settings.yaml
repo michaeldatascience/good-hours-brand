@@ -1,0 +1,22 @@
+brandName: Good Hours
+legalName: Good Hours LLC
+domain: goodhoursrecovery.com
+draft: true
+supportEmail: support@goodhoursrecovery.com
+responseTime: "TBD: 1 business day"
+announcement: "No subscription, ever."
+trustStrip:
+  - icon: truck
+    title: "TBD: Free US shipping"
+    text: "TBD: ships in 1 to 2 business days"
+  - icon: rotate-ccw
+    title: "TBD: 30-day returns"
+    text: "Not for you? Send it back."
+  - icon: shield-check
+    title: "TBD: 1-year warranty"
+    text: "We fix or replace it."
+wellnessDisclaimer: >
+  Good Hours products are intended for general wellness and relaxation.
+  They are not intended to diagnose, treat, cure or prevent any disease.
+seoTitle: "Good Hours | At-home recovery gadgets"
+seoDescription: "Red light, heat and massage gadgets for your evening routine. Clear specs, one-time price, no subscription."

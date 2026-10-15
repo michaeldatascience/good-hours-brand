@@ -1,0 +1,21 @@
+---
+interface Props {
+  buyUrl?: string;
+  label?: string;
+}
+
+const href = Astro.props.buyUrl?.trim();
+const label = Astro.props.label ?? 'Buy';
+---
+
+{
+  href ? (
+    <a class="btn" href={href} rel="noopener noreferrer">
+      {label}
+    </a>
+  ) : (
+    <button class="btn is-disabled" type="button" disabled>
+      Coming soon
+    </button>
+  )
+}

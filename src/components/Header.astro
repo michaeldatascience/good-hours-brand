@@ -1,0 +1,70 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Tbd from './Tbd.astro';
+import { getActiveProducts, getSettings } from '../lib/catalog';
+
+const settings = await getSettings();
+const products = await getActiveProducts();
+const path = Astro.url.pathname;
+const draft = settings.draft;
+
+function firstIn(category: string) {
+  return products.find((item) => item.data.category === category);
+}
+
+const red = firstIn('red-light');
+const massage = firstIn('massage');
+const sleep = firstIn('sleep');
+
+const links = [
+  { href: '/routines/', label: 'Routines' },
+  { href: '/how-it-works/', label: 'How it works' },
+  { href: '/compare/', label: 'Compare' },
+  { href: '/support/', label: 'Support' },
+];
+---
+
+<header class="site-header" data-header>
+  {draft && <div class="draft-bar">Draft site for internal review.</div>}
+  <div class="header-bar wrap">
+    <a class="logo" href="/">
+      <Logo draft={draft} />
+    </a>
+    <nav class="nav" data-nav aria-label="Primary">
+      <div class="sub" data-sub>
+        <div class="nav-row">
+          <a class="nav-link" href="/products/" aria-current={path.startsWith('/products') ? 'page' : undefined}>Products</a>
+          <button class="sub-toggle" type="button" data-sub-toggle aria-expanded="false" aria-label="Open product menu">
+            <Icon name="chevron-down" size={18} />
+          </button>
+        </div>
+        <div class="submenu">
+          <a href={red ? `/products/${red.id}/` : '/products/'}>Red Light</a>
+          <a href={massage ? `/products/${massage.id}/` : '/products/'}>Massage</a>
+          <a href={sleep ? `/products/${sleep.id}/` : '/products/'}>Sleep</a>
+          <a href="/products/#bundles">Bundles</a>
+          <a href="/accessories/">Accessories</a>
+          <a href="/products/">All products</a>
+        </div>
+      </div>
+      {
+        links.map((link) => (
+          <a class="nav-link" href={link.href} aria-current={path === link.href ? 'page' : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+      <a class="btn nav-shop" href="/products/">Shop now</a>
+    </nav>
+    {settings.announcement && (
+      <p class="announce-desktop">
+        <Tbd value={settings.announcement} draft={draft} />
+      </p>
+    )}
+    <a class="btn header-shop" href="/products/">Shop now</a>
+    <button class="nav-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Menu">
+      <Icon name="menu" />
+    </button>
+  </div>
+</header>

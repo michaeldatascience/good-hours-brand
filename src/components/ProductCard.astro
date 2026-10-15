@@ -1,0 +1,50 @@
+---
+import Tbd from './Tbd.astro';
+import Shot from './Shot.astro';
+import Price from './Price.astro';
+import type { Product } from '../lib/catalog';
+import { categoryLabel } from '../lib/labels';
+
+interface Props {
+  product: Product;
+  draft: boolean;
+  kind?: 'light' | 'gun' | 'mask' | 'bundle' | 'generic';
+}
+
+const { product, draft } = Astro.props;
+const active = product.data.status === 'active';
+const image = product.data.images[0];
+const kind =
+  Astro.props.kind ??
+  (product.data.category === 'red-light' ? 'light' : product.data.category === 'massage' ? 'gun' : 'mask');
+---
+
+<article class="card">
+  {
+    active ? (
+      <a href={`/products/${product.id}/`}>
+        <Shot image={image?.image} alt={image?.alt ?? product.data.name} shot={image?.shot} draft={draft} shape="card" kind={kind} sizes="(min-width: 900px) 360px, 100vw" />
+      </a>
+    ) : (
+      <Shot image={image?.image} alt={image?.alt ?? product.data.name} shot={image?.shot} draft={draft} shape="card" kind={kind} sizes="(min-width: 900px) 360px, 100vw" />
+    )
+  }
+  <div class="card-body">
+    <p class="eyebrow">{categoryLabel[product.data.category]}</p>
+    <h3>
+      {active ? <a href={`/products/${product.id}/`}>{product.data.name}</a> : product.data.name}
+    </h3>
+    <p>
+      <Tbd value={product.data.tagline} draft={draft} />
+    </p>
+    <div class="chips">
+      {product.data.specChips.map((chip) => (
+        <span class="chip">
+          <Tbd value={chip} draft={draft} />
+        </span>
+      ))}
+    </div>
+    {product.data.price != null ? <Price amount={product.data.price} /> : <p class="muted">Price later</p>}
+    {product.data.status === 'coming-soon' && <span class="badge">Coming soon</span>}
+  </div>
+</article>

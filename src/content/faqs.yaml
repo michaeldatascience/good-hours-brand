@@ -1,0 +1,33 @@
+manuals: Manuals coming soon. Each box still includes a printed quick start.
+warrantyNote: "TBD: 1-year warranty. We fix or replace it. The warranty page has the draft terms."
+groups:
+  - title: Orders and shipping
+    items:
+      - q: Where do you ship?
+        a: "TBD: the United States, for now. Timing and rates are on the shipping page."
+      - q: When does my order ship?
+        a: "TBD: 1 to 2 business days after the order."
+      - q: Do I need an account?
+        a: No. There is no account and no subscription.
+  - title: Using the devices
+    items:
+      - q: Do I need an app?
+        a: No. The devices work with the buttons on the device. There is no app.
+      - q: How long is a session?
+        a: Most people use the Recovery Light for 10 to 15 minutes. The Percussion Mini shuts off after 15 minutes. The eye mask is for the last few minutes of the night. Start shorter than you think.
+      - q: Can I travel with them?
+        a: "TBD: confirm airline battery rules before you fly. They are sized for a carry-on."
+  - title: Warranty and returns
+    items:
+      - q: What if I change my mind?
+        a: "TBD: 30-day returns. Send it back if it is not for you. Details are on the returns page."
+      - q: How long is the warranty?
+        a: "TBD: 1 year. We fix or replace it. Read the warranty page for the draft terms."
+  - title: Safety
+    items:
+      - q: Are these a substitute for a doctor?
+        a: No. They are wellness and relaxation gadgets. Read the note in the footer before you buy.
+      - q: Who should ask a doctor first?
+        a: Pregnant people, anyone with an implanted device, and anyone with a health condition. Not for children.
+      - q: Can I use the massage gun anywhere?
+        a: "No. Stay off the front of the neck, the head, the spine, and joints. Stay off bruises and broken skin. Use it on larger muscles. TBD: max 2 minutes per spot."

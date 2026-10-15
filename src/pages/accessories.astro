@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Shot from '../components/Shot.astro';
+import Price from '../components/Price.astro';
+import BuyButton from '../components/BuyButton.astro';
+import Tbd from '../components/Tbd.astro';
+import { getAccessories, getProducts, getSettings } from '../lib/catalog';
+
+const settings = await getSettings();
+const accessories = (await getAccessories()).filter((item) => item.data.status === 'active');
+const products = await getProducts();
+const draft = settings.draft;
+
+function fitsLabel(id: string) {
+  return products.find((item) => item.id === id)?.data.name ?? id;
+}
+
+function fitsHref(id: string) {
+  const product = products.find((item) => item.id === id);
+  if (product?.data.status === 'active') return `/products/${id}/`;
+  return '/products/';
+}
+---
+
+<Base title="Accessories" description="Stands, cases, heads, and goggles that fit Good Hours devices.">
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <p class="eyebrow">Add-ons</p>
+      <h1>Accessories</h1>
+      <p class="lede">Small pieces that fit the devices you already have. Prices are one-time. Nothing here needs an app.</p>
+    </div>
+  </section>
+  <section class="section section-light">
+    <div class="wrap grid-2">
+      {
+        accessories.map((item) => (
+          <article class="card">
+            <Shot image={item.data.image} alt={item.data.alt} shot={item.data.shot} draft={draft} shape="card" kind="generic" sizes="(min-width: 800px) 480px, 100vw" />
+            <div class="card-body">
+              <h2 style="font-size: 26px">{item.data.name}</h2>
+              <p><Tbd value={item.data.summary} draft={draft} /></p>
+              <p class="muted">
+                Fits{' '}
+                {item.data.fits.map((id, index) => (
+                  <>
+                    {index > 0 && ', '}
+                    <a href={fitsHref(id)}>{fitsLabel(id)}</a>
+                  </>
+                ))}
+              </p>
+              <Price amount={item.data.price} />
+              <BuyButton buyUrl={item.data.buyUrl} />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Base>

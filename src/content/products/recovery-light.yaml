@@ -1,0 +1,110 @@
+name: Recovery Light
+status: active
+category: red-light
+needs:
+  - after-training
+  - long-day
+  - before-bed
+  - travel
+order: 1
+tagline: Red and near-infrared light that fits in your palm.
+summary: A palm-size aluminum light with four wavelengths, two modes and a 20-minute timer. Strap it on, sit back, and give yourself fifteen minutes.
+price: 249
+buyUrl: ""
+variants:
+  - name: White
+    swatch: "#EDEDEA"
+    available: true
+  - name: "TBD: Graphite"
+    swatch: "#3A3D42"
+    available: false
+images:
+  - image: ../../assets/images/recovery-light-front.png
+    alt: Recovery Light, front view
+    shot: Device front on dark stone, soft evening light
+  - alt: Recovery Light strapped to the forearm
+    shot: Man 40s on sofa, device on forearm, red glow, warm lamp
+  - alt: Recovery Light in hand for size
+    shot: Device in hand over walnut desk
+  - alt: Recovery Light on its charging dock
+    shot: Device on dock, bedside table
+specChips:
+  - 4 wavelengths
+  - 20-min timer
+  - USB-C
+  - Cordless
+benefits:
+  - title: Four wavelengths
+    text: 630, 660, 830 and 850 nm. Two modes, one button.
+  - title: Built for a routine
+    text: Set 5, 10, 15 or 20 minutes. It turns itself off.
+  - title: Goes where you go
+    text: Palm size, cordless, hand straps. Fits in a carry-on.
+  - title: No subscription
+    text: No app needed. Buy it once, use it every evening.
+inTheBox:
+  - Recovery Light
+  - Eye protection goggles
+  - Storage box
+  - Charging dock
+  - USB-C cable
+  - Power adapter
+  - Manual
+howToUse:
+  - title: Charge and pick a mode
+    text: Mode 1 is 660 + 850 nm. Mode 2 is 630 + 830 nm.
+  - title: Strap it on or hold it close
+    text: Rest it on the area or hold it a few inches away. Wear the goggles.
+  - title: Set the timer and relax
+    text: Start with 10 minutes. It shuts off on its own.
+specs:
+  - group: Light
+    label: Wavelengths
+    value: 630, 660, 830, 850 nm
+  - group: Light
+    label: Modes
+    value: "Mode 1: 660 + 850 nm. Mode 2: 630 + 830 nm"
+  - group: Light
+    label: LEDs
+    value: 12 four-core LEDs
+  - group: Light
+    label: Output
+    value: 100 mW/cm² at LED surface
+  - group: Use
+    label: Timer
+    value: 5, 10, 15 or 20 min
+  - group: Power
+    label: Battery
+    value: 4,000 mAh
+  - group: Power
+    label: Charging
+    value: USB-C, charging dock included
+  - group: Build
+    label: Body
+    value: Aluminum
+  - group: Build
+    label: Weight
+    value: "TBD: confirm from sample"
+  - group: Build
+    label: Size
+    value: "TBD: confirm from sample"
+faq:
+  - q: How long should a session be?
+    a: Most people use it for 10 to 15 minutes. The timer goes up to 20.
+  - q: Do I need an app?
+    a: No. There is no app and no subscription.
+  - q: Can I take it on a plane?
+    a: "TBD: confirm battery rules. It fits in a carry-on."
+  - q: Does it get hot?
+    a: It feels gently warm. It is not a heater.
+precautions:
+  - Wear the included goggles. Do not look straight into the light.
+  - Do not use on broken skin or if you are sensitive to light.
+  - Pregnant, have an implanted device, or have a health condition? Ask your doctor first.
+  - Not for children.
+bundle: recovery-kit
+related:
+  - percussion-mini
+  - heated-eye-mask
+seoTitle: Recovery Light, handheld red light device
+seoDescription: Palm-size red and near-infrared light. 4 wavelengths, 20-minute timer, USB-C, no subscription.

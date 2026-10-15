@@ -1,0 +1,16 @@
+---
+interface Props {
+  draft?: boolean;
+}
+
+const { draft = false } = Astro.props;
+---
+
+<span class="logo-lockup">
+  <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M6 22h20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    <path d="M8 22a8 8 0 0 1 16 0" fill="#C4512F"></path>
+  </svg>
+  <span>Good Hours</span>
+  {draft && <span class="logo-tbd">TBD</span>}
+</span>

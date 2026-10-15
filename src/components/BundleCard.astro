@@ -1,0 +1,36 @@
+---
+import Tbd from './Tbd.astro';
+import Price from './Price.astro';
+import Shot from './Shot.astro';
+import type { Bundle, Product } from '../lib/catalog';
+import { formatUsd, savingsAmount } from '../lib/format';
+
+interface Props {
+  bundle: Bundle;
+  products: Product[];
+  draft: boolean;
+}
+
+const { bundle, products, draft } = Astro.props;
+const included = bundle.data.items
+  .map((id) => products.find((item) => item.id === id))
+  .filter((item): item is Product => !!item);
+const prices = included.map((item) => item.data.price).filter((price): price is number => price != null);
+const saved = prices.length === included.length ? savingsAmount(prices, bundle.data.price) : 0;
+const image = bundle.data.images[0];
+const href = bundle.data.status === 'active' ? `/bundles/${bundle.id}/` : '/products/#bundles';
+---
+
+<article class="card">
+  <a href={href}>
+    <Shot image={image?.image} alt={image?.alt ?? bundle.data.name} shot={image?.shot} draft={draft} shape="card" kind="bundle" sizes="(min-width: 900px) 560px, 100vw" />
+  </a>
+  <div class="card-body">
+    <p class="eyebrow">Kit</p>
+    <h3><a href={href}>{bundle.data.name}</a></h3>
+    <p><Tbd value={bundle.data.tagline} draft={draft} /></p>
+    <Price amount={bundle.data.price} />
+    {saved > 0 && <p class="save">You save {formatUsd(saved)}</p>}
+    <p class="muted">{included.map((item) => item.data.name).join(', ')}</p>
+  </div>
+</article>

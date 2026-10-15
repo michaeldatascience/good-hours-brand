@@ -1,0 +1,79 @@
+title: Compare
+description: Recovery Light, Percussion Mini, and Heated Eye Mask specs next to typical premium and typical budget ranges.
+intro: Each table is one Good Hours device next to typical premium and typical budget gear. Those columns are ranges, not a named rival. Where we have not checked a number, it says so.
+footnote: "Market values are typical ranges from public listings. Checked on TBD: October 2026."
+tables:
+  - product: recovery-light
+    rows:
+      - label: Wavelengths
+        ours: "4 (630, 660, 830, 850 nm)"
+        premium: "TBD: 2 to 4"
+        budget: "TBD: 1 to 2"
+      - label: Output at surface
+        ours: "100 mW/cm²"
+        premium: "TBD: often not listed"
+        budget: "TBD: often not listed"
+      - label: Timer
+        ours: "5 to 20 min"
+        premium: "TBD: varies"
+        budget: "TBD: varies"
+      - label: Battery
+        ours: "4,000 mAh"
+        premium: "TBD: varies"
+        budget: "TBD: varies"
+      - label: Subscription
+        ours: Never
+        premium: "TBD: some need an app"
+        budget: No
+      - label: Price
+        ours: "TBD: $249"
+        premium: "TBD: $339 to $449"
+        budget: "TBD: $60 to $150"
+  - product: percussion-mini
+    rows:
+      - label: Weight
+        ours: "1.4 lb (620 g)"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Speeds
+        ours: "3 (2,800 to 3,200 rpm)"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Warm and cool head
+        ours: "95 to 113 °F (35 to 45 °C), cool 50 to 68 °F (10 to 20 °C)"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Battery life
+        ours: "About 3 to 5 hours"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Subscription
+        ours: Never
+        premium: "TBD: some need an app"
+        budget: "TBD: usually none"
+      - label: Price
+        ours: "TBD: $199"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+  - product: heated-eye-mask
+    rows:
+      - label: Warmth
+        ours: "TBD: confirm from sample"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Air pressure
+        ours: "TBD: confirm from sample"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Auto-off
+        ours: "TBD: confirm from sample"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"
+      - label: Subscription
+        ours: Never
+        premium: "TBD: some need an app"
+        budget: "TBD: usually none"
+      - label: Price
+        ours: "TBD: $119"
+        premium: "TBD: confirm range"
+        budget: "TBD: confirm range"

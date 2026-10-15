@@ -1,0 +1,110 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Gallery from '../../components/Gallery.astro';
+import BuyButton from '../../components/BuyButton.astro';
+import Price from '../../components/Price.astro';
+import Tbd from '../../components/Tbd.astro';
+import FaqList from '../../components/FaqList.astro';
+import Shot from '../../components/Shot.astro';
+import { getProducts, getSettings } from '../../lib/catalog';
+import { formatUsd, savingsAmount } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const bundles = await getCollection('bundles');
+  return bundles
+    .filter((bundle) => bundle.data.status === 'active')
+    .map((bundle) => ({ params: { slug: bundle.id }, props: { bundle } }));
+}
+
+interface Props {
+  bundle: CollectionEntry<'bundles'>;
+}
+
+const { bundle } = Astro.props;
+const settings = await getSettings();
+const products = await getProducts();
+const draft = settings.draft;
+const data = bundle.data;
+const included = data.items
+  .map((id) => products.find((item) => item.id === id))
+  .filter((item): item is NonNullable<typeof item> => !!item);
+const prices = included.map((item) => item.data.price).filter((price): price is number => price != null);
+const saved = prices.length === included.length ? savingsAmount(prices, data.price) : 0;
+const title = data.seoTitle || data.name;
+const description = data.seoDescription || data.summary;
+---
+
+<Base title={title} description={description} buyBar={true}>
+  <section class="section section-dark">
+    <div class="wrap product-top">
+      <Gallery images={data.images} draft={draft} kind="bundle" />
+      <div class="product-info">
+        <p class="eyebrow">Kit</p>
+        <h1>{data.name}</h1>
+        <p><Tbd value={data.tagline} draft={draft} /></p>
+        <Price amount={data.price} />
+        {saved > 0 && <p class="save">You save {formatUsd(saved)}</p>}
+        <p class="muted"><Tbd value={data.summary} draft={draft} /></p>
+        <BuyButton buyUrl={data.buyUrl} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap stack">
+      <h2>In the kit</h2>
+      <div class="grid-2">
+        {included.map((item) => (
+          <a class="card mini-card" href={item.data.status === 'active' ? `/products/${item.id}/` : '/products/'}>
+            <Shot
+              image={item.data.images[0]?.image}
+              alt={item.data.images[0]?.alt ?? item.data.name}
+              shot={item.data.images[0]?.shot}
+              draft={draft}
+              shape="card"
+              kind={item.data.category === 'massage' ? 'gun' : item.data.category === 'sleep' ? 'mask' : 'light'}
+              widths={[200, 400]}
+              sizes="96px"
+            />
+            <div>
+              <h3>{item.data.name}</h3>
+              <p><Tbd value={item.data.tagline} draft={draft} /></p>
+              {item.data.price != null && <Price amount={item.data.price} />}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <h2>Why together</h2>
+      <div class="grid-3">
+        {data.whyTogether.map((item) => (
+          <article class="card card-body">
+            <h3><Tbd value={item.title} draft={draft} /></h3>
+            <p class="muted"><Tbd value={item.text} draft={draft} /></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap stack">
+      <h2>Questions</h2>
+      <FaqList items={data.faq} draft={draft} />
+      <BuyButton buyUrl={data.buyUrl} />
+    </div>
+  </section>
+
+  <div slot="buybar" class="buy-bar">
+    <div class="buy-bar-copy">
+      <div class="buy-bar-name">{data.name}</div>
+      <Price amount={data.price} />
+    </div>
+    <BuyButton buyUrl={data.buyUrl} />
+  </div>
+</Base>

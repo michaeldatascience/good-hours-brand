@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Tbd from '../components/Tbd.astro';
+import { getSettings } from '../lib/catalog';
+import { mailHref } from '../lib/format';
+
+const settings = await getSettings();
+const draft = settings.draft;
+---
+
+<Base title="Contact" description="Email Good Hours support. There is no form and no account.">
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <p class="eyebrow">Inbox</p>
+      <h1>Contact</h1>
+      <p class="lede">Write to us. There is no form on this page and no account to sign in to.</p>
+      <p>
+        <a class="btn" href={mailHref(settings.supportEmail)}>
+          <Tbd value={settings.supportEmail} draft={draft} />
+        </a>
+      </p>
+      <p>We aim to reply in <Tbd value={settings.responseTime} draft={draft} />.</p>
+      <p class="muted">Orders, returns, and warranty questions can all go to the same address.</p>
+    </div>
+  </section>
+</Base>

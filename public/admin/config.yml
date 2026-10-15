@@ -1,0 +1,517 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.241.0/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: goodhours/site
+  branch: main
+
+media_folder: src/assets/images
+public_folder: /src/assets/images
+
+locale: en
+
+collections:
+  - name: settings
+    label: Settings
+    files:
+      - name: settings
+        label: Site settings
+        file: src/content/settings.yaml
+        fields:
+          - { label: Brand name, name: brandName, widget: string, hint: "The name on the site. Good Hours." }
+          - { label: Legal name, name: legalName, widget: string, hint: "Used in the footer only. Good Hours LLC." }
+          - { label: Domain, name: domain, widget: string, hint: "The site domain, no https. Start with TBD: if it is not final." }
+          - { label: Draft mode, name: draft, widget: boolean, hint: "On until launch. Shows the draft bar, highlights TBD, and blocks search engines." }
+          - { label: Support email, name: supportEmail, widget: string, hint: "The inbox on the contact page. Start with TBD: if it is not final." }
+          - { label: Response time, name: responseTime, widget: string, hint: "Shown on the contact page. Example: TBD: 1 business day." }
+          - { label: Announcement, name: announcement, widget: string, hint: "Short line in the header. Leave blank to hide it." }
+          - label: Trust strip
+            name: trustStrip
+            widget: list
+            hint: "Three short promises under the home hero."
+            fields:
+              - label: Icon
+                name: icon
+                widget: select
+                hint: "Icon name. truck, rotate-ccw, or shield-check."
+                options: [truck, rotate-ccw, shield-check, sun, thermometer, waves, moon, clock, luggage]
+              - { label: Title, name: title, widget: string, hint: "Short title. Start with TBD: if the promise is not final." }
+              - { label: Text, name: text, widget: string, hint: "One short line under the title." }
+          - { label: Wellness disclaimer, name: wellnessDisclaimer, widget: text, hint: "Footer note. Keep the standard not-intended sentence. Do not copy it into other fields." }
+          - { label: SEO title, name: seoTitle, widget: string, hint: "Home page title for search and sharing." }
+          - { label: SEO description, name: seoDescription, widget: text, hint: "Home page description. One or two sentences. No medical words." }
+
+  - name: home
+    label: Home
+    files:
+      - name: home
+        label: Home page
+        file: src/content/home.yaml
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            hint: "The first screen."
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string, hint: "Small label above the heading." }
+              - { label: Heading, name: heading, widget: string, hint: "Page title. No exclamation mark." }
+              - { label: Subheading, name: subheading, widget: text, hint: "One or two sentences under the heading." }
+              - { label: Button label, name: buttonLabel, widget: string, hint: "Text on the hero button." }
+              - { label: Button link, name: buttonLink, widget: string, hint: "Path the button opens, such as /products/." }
+              - label: Image
+                name: image
+                widget: object
+                hint: "Hero photo. Leave the file empty to show the placeholder."
+                fields: &imageFields
+                  - { label: Image file, name: image, widget: image, required: false, hint: "Optional photo. Empty shows the drawn placeholder." }
+                  - { label: Alt text, name: alt, widget: string, hint: "Required. What a screen reader should say. No medical words." }
+                  - { label: Shot, name: shot, widget: string, hint: "Required. Directions for the photo shoot. Shown on the draft site." }
+          - label: Products section
+            name: products
+            widget: object
+            hint: "Intro above the product cards. The cards themselves come from Products."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Section heading." }
+              - { label: Intro, name: intro, widget: text, hint: "Short intro. No medical words." }
+          - label: Routines
+            name: routines
+            widget: object
+            hint: "Four short routines on the home page."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Section heading." }
+              - label: Items
+                name: items
+                widget: list
+                hint: "One card per routine."
+                fields:
+                  - label: Need
+                    name: need
+                    widget: select
+                    hint: "Which moment this routine is for."
+                    options:
+                      - { label: After training, value: after-training }
+                      - { label: After a long day, value: long-day }
+                      - { label: Before bed, value: before-bed }
+                      - { label: In the bag, value: travel }
+                  - { label: Title, name: title, widget: string, hint: "Card title." }
+                  - { label: Minutes, name: minutes, widget: number, hint: "How long the routine is, as a number." }
+                  - label: Steps
+                    name: steps
+                    widget: list
+                    hint: "Short steps, in order."
+                    field: { label: Step, name: step, widget: string, hint: "One step. Plain words." }
+                  - label: Product
+                    name: product
+                    widget: relation
+                    collection: products
+                    search_fields: [name]
+                    value_field: "{{slug}}"
+                    display_fields: [name]
+                    hint: "The main device for this routine."
+          - label: How it works
+            name: howItWorks
+            widget: object
+            hint: "Three plain explanations."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Section heading." }
+              - label: Items
+                name: items
+                widget: list
+                hint: "One card per idea."
+                fields:
+                  - label: Icon
+                    name: icon
+                    widget: select
+                    hint: "sun, thermometer, or waves."
+                    options: [sun, thermometer, waves, moon, clock, luggage, truck, shield-check, rotate-ccw]
+                  - { label: Title, name: title, widget: string, hint: "Card title." }
+                  - { label: Text, name: text, widget: text, hint: "Two or three sentences. No medical words." }
+          - label: Compare section
+            name: compare
+            widget: object
+            hint: "Intro for the Recovery Light table. The rows live in Compare."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Section heading." }
+              - { label: Intro, name: intro, widget: text, hint: "One or two sentences." }
+          - label: Bundles section
+            name: bundles
+            widget: object
+            hint: "Intro above the kit cards. The kits live in Bundles."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Section heading." }
+              - { label: Intro, name: intro, widget: text, hint: "One or two sentences." }
+          - label: FAQ section
+            name: faq
+            widget: object
+            hint: "Questions picked from the FAQ file. The wording must match."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Section heading." }
+              - label: Questions
+                name: questions
+                widget: list
+                hint: "Copy each question exactly from FAQs."
+                field: { label: Question, name: question, widget: string, hint: "Must match a question in FAQs, character for character." }
+          - label: Closing
+            name: closing
+            widget: object
+            hint: "The last block on the home page."
+            fields:
+              - { label: Heading, name: heading, widget: string, hint: "Closing heading." }
+              - { label: Text, name: text, widget: text, hint: "One or two sentences." }
+              - { label: Button label, name: buttonLabel, widget: string, hint: "Text on the button." }
+              - { label: Button link, name: buttonLink, widget: string, hint: "Path the button opens, such as /products/." }
+
+  - name: products
+    label: Products
+    label_singular: Product
+    folder: src/content/products
+    create: true
+    format: yaml
+    extension: yaml
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}} ({{status}})"
+    fields:
+      - { label: Name, name: name, widget: string, hint: "Working product name." }
+      - label: Status
+        name: status
+        widget: select
+        hint: "Active gets a page. Coming soon is a card only. Hidden is left out."
+        options:
+          - { label: Active, value: active }
+          - { label: Coming soon, value: coming-soon }
+          - { label: Hidden, value: hidden }
+      - label: Category
+        name: category
+        widget: select
+        hint: "Used for the header menu."
+        options:
+          - { label: Red light, value: red-light }
+          - { label: Massage, value: massage }
+          - { label: Sleep, value: sleep }
+      - label: Needs
+        name: needs
+        widget: select
+        multiple: true
+        hint: "Which product-page groups include this device."
+        options:
+          - { label: After training, value: after-training }
+          - { label: After a long day, value: long-day }
+          - { label: Before bed, value: before-bed }
+          - { label: In the bag, value: travel }
+      - { label: Order, name: order, widget: number, hint: "Lower numbers show first." }
+      - { label: Tagline, name: tagline, widget: string, hint: "One line. Max 80 characters. No medical words." }
+      - { label: Summary, name: summary, widget: text, hint: "Max 240 characters. What it is, not a result claim." }
+      - { label: Price, name: price, widget: number, required: false, value_type: int, hint: "Dollars, no cents. Leave empty only for a coming-soon device with no price yet." }
+      - { label: Buy link, name: buyUrl, widget: string, required: false, hint: "Full URL. Leave empty and the button says Coming soon." }
+      - label: Variants
+        name: variants
+        widget: list
+        min: 1
+        hint: "At least one color."
+        fields:
+          - { label: Name, name: name, widget: string, hint: "Color name. Start with TBD: if it is not final." }
+          - { label: Swatch, name: swatch, widget: color, hint: "Hex color for the dot, like #EDEDEA." }
+          - { label: Available, name: available, widget: boolean, hint: "Off means the swatch shows but cannot be picked." }
+      - label: Images
+        name: images
+        widget: list
+        min: 1
+        hint: "Gallery. Alt and shot are required even when the photo is missing."
+        fields:
+          - { label: Image file, name: image, widget: image, required: false, hint: "Optional. Empty shows the drawn placeholder." }
+          - { label: Alt text, name: alt, widget: string, hint: "Required. What a screen reader should say. No medical words." }
+          - { label: Shot, name: shot, widget: string, hint: "Required. Directions for the photo shoot." }
+      - label: Spec chips
+        name: specChips
+        widget: list
+        min: 3
+        max: 4
+        hint: "Three or four short pills, such as 4 wavelengths."
+        field: { label: Chip, name: chip, widget: string, hint: "A few words. Start with TBD: if unconfirmed." }
+      - label: Benefits
+        name: benefits
+        widget: list
+        min: 3
+        max: 5
+        hint: "Three to five reasons. No result claims for the light or the mask."
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Short title." }
+          - { label: Text, name: text, widget: text, hint: "One or two sentences." }
+      - label: In the box
+        name: inTheBox
+        widget: list
+        min: 1
+        hint: "What ships. Start each line with TBD: if the list is not confirmed."
+        field: { label: Item, name: item, widget: string, hint: "One item." }
+      - label: How to use
+        name: howToUse
+        widget: list
+        min: 3
+        max: 3
+        hint: "Exactly three steps."
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Step title." }
+          - { label: Text, name: text, widget: text, hint: "What the person does." }
+      - label: Specs
+        name: specs
+        widget: list
+        hint: "Grouped spec rows. US units first, metric in brackets."
+        fields:
+          - { label: Group, name: group, widget: string, hint: "Group name, such as Light or Power." }
+          - { label: Label, name: label, widget: string, hint: "Row label." }
+          - { label: Value, name: value, widget: string, hint: "The number or fact. Start with TBD: if unconfirmed." }
+      - label: FAQ
+        name: faq
+        widget: list
+        min: 3
+        hint: "At least three questions for this product."
+        fields:
+          - { label: Question, name: q, widget: string, hint: "The question." }
+          - { label: Answer, name: a, widget: text, hint: "The answer. No medical words." }
+      - label: Precautions
+        name: precautions
+        widget: list
+        min: 3
+        hint: "At least three. The safety page link is added by the template."
+        field: { label: Precaution, name: precaution, widget: text, hint: "One precaution. No disease names." }
+      - label: Bundle
+        name: bundle
+        widget: relation
+        collection: bundles
+        required: false
+        search_fields: [name]
+        value_field: "{{slug}}"
+        display_fields: [name]
+        hint: "Optional kit card on the product page."
+      - label: Related
+        name: related
+        widget: list
+        required: false
+        hint: "Other products to show at the bottom."
+        field:
+          label: Product
+          name: product
+          widget: relation
+          collection: products
+          search_fields: [name]
+          value_field: "{{slug}}"
+          display_fields: [name]
+          hint: "A related product."
+      - { label: SEO title, name: seoTitle, widget: string, required: false, hint: "Optional. Falls back to the product name." }
+      - { label: SEO description, name: seoDescription, widget: text, required: false, hint: "Optional. Falls back to the summary." }
+
+  - name: bundles
+    label: Bundles
+    label_singular: Bundle
+    folder: src/content/bundles
+    create: true
+    format: yaml
+    extension: yaml
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    fields:
+      - { label: Name, name: name, widget: string, hint: "Kit name." }
+      - label: Status
+        name: status
+        widget: select
+        hint: "Active gets a page. Hidden is left out."
+        options:
+          - { label: Active, value: active }
+          - { label: Coming soon, value: coming-soon }
+          - { label: Hidden, value: hidden }
+      - { label: Order, name: order, widget: number, hint: "Lower numbers show first." }
+      - { label: Tagline, name: tagline, widget: string, hint: "One line. Max 80 characters." }
+      - { label: Summary, name: summary, widget: text, hint: "Max 240 characters." }
+      - label: Items
+        name: items
+        widget: list
+        min: 2
+        hint: "At least two products. Savings are calculated, not typed."
+        field:
+          label: Product
+          name: product
+          widget: relation
+          collection: products
+          search_fields: [name]
+          value_field: "{{slug}}"
+          display_fields: [name]
+          hint: "A product in this kit."
+      - { label: Price, name: price, widget: number, value_type: int, hint: "Kit price in dollars, no cents." }
+      - { label: Buy link, name: buyUrl, widget: string, required: false, hint: "Full URL. Leave empty and the button says Coming soon." }
+      - label: Images
+        name: images
+        widget: list
+        min: 1
+        hint: "Gallery for the kit."
+        fields:
+          - { label: Image file, name: image, widget: image, required: false, hint: "Optional. Empty shows the drawn placeholder." }
+          - { label: Alt text, name: alt, widget: string, hint: "Required. No medical words." }
+          - { label: Shot, name: shot, widget: string, hint: "Required. Directions for the photo shoot." }
+      - label: Why together
+        name: whyTogether
+        widget: list
+        min: 2
+        hint: "At least two reasons these belong in one kit."
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Short title." }
+          - { label: Text, name: text, widget: text, hint: "One or two sentences." }
+      - label: FAQ
+        name: faq
+        widget: list
+        min: 1
+        hint: "Questions about the kit."
+        fields:
+          - { label: Question, name: q, widget: string, hint: "The question." }
+          - { label: Answer, name: a, widget: text, hint: "The answer." }
+      - { label: SEO title, name: seoTitle, widget: string, required: false, hint: "Optional search title." }
+      - { label: SEO description, name: seoDescription, widget: text, required: false, hint: "Optional search description." }
+
+  - name: accessories
+    label: Accessories
+    label_singular: Accessory
+    folder: src/content/accessories
+    create: true
+    format: yaml
+    extension: yaml
+    identifier_field: name
+    slug: "{{slug}}"
+    summary: "{{name}}"
+    fields:
+      - { label: Name, name: name, widget: string, hint: "Accessory name." }
+      - label: Status
+        name: status
+        widget: select
+        hint: "Hidden items are left off the site."
+        options:
+          - { label: Active, value: active }
+          - { label: Coming soon, value: coming-soon }
+          - { label: Hidden, value: hidden }
+      - { label: Order, name: order, widget: number, hint: "Lower numbers show first." }
+      - label: Fits
+        name: fits
+        widget: list
+        min: 1
+        hint: "Which products this fits."
+        field:
+          label: Product
+          name: product
+          widget: relation
+          collection: products
+          search_fields: [name]
+          value_field: "{{slug}}"
+          display_fields: [name]
+          hint: "A product this accessory fits."
+      - { label: Summary, name: summary, widget: text, hint: "Max 240 characters. Start with TBD: if the contents are not confirmed." }
+      - { label: Price, name: price, widget: number, value_type: int, hint: "Dollars, no cents. The working number can still be unconfirmed in the summary." }
+      - { label: Buy link, name: buyUrl, widget: string, required: false, hint: "Full URL. Leave empty and the button says Coming soon." }
+      - { label: Image file, name: image, widget: image, required: false, hint: "Optional. Empty shows the drawn placeholder." }
+      - { label: Alt text, name: alt, widget: string, hint: "Required. No medical words." }
+      - { label: Shot, name: shot, widget: string, hint: "Required. Directions for the photo shoot." }
+
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: src/content/pages
+    create: true
+    format: frontmatter
+    extension: md
+    identifier_field: title
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - { label: Title, name: title, widget: string, hint: "Page heading. No exclamation mark." }
+      - { label: Description, name: description, widget: text, hint: "Search description. One or two sentences." }
+      - { label: Body, name: body, widget: markdown, hint: "The page. No medical words. No em dashes. Write 3 to 5, not a dash." }
+
+  - name: policies
+    label: Policies
+    label_singular: Policy
+    folder: src/content/policies
+    create: false
+    delete: false
+    format: frontmatter
+    extension: md
+    identifier_field: title
+    summary: "{{title}}"
+    fields:
+      - { label: Title, name: title, widget: string, hint: "Policy title. Do not rename the file." }
+      - { label: Description, name: description, widget: text, hint: "Search description." }
+      - { label: Body, name: body, widget: markdown, hint: "Draft terms. Put TBD: in front of any number that is not final. No medical words." }
+
+  - name: journal
+    label: Journal
+    label_singular: Post
+    folder: src/content/journal
+    create: true
+    format: frontmatter
+    extension: md
+    identifier_field: title
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - { label: Title, name: title, widget: string, hint: "Post title. No exclamation mark." }
+      - { label: Description, name: description, widget: text, hint: "One or two sentences for the index and search." }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, hint: "Publish date." }
+      - { label: Image file, name: image, widget: image, required: false, hint: "Optional cover. Empty shows the drawn placeholder." }
+      - { label: Alt text, name: alt, widget: string, hint: "Required. No medical words." }
+      - { label: Shot, name: shot, widget: string, hint: "Required. Directions for the cover photo." }
+      - { label: Body, name: body, widget: markdown, hint: "500 to 800 words. No medical words. No em dashes." }
+
+  - name: faqs
+    label: FAQs
+    files:
+      - name: faqs
+        label: FAQ groups
+        file: src/content/faqs.yaml
+        fields:
+          - { label: Manuals note, name: manuals, widget: text, hint: "Shown on the support page." }
+          - { label: Warranty note, name: warrantyNote, widget: text, hint: "Shown on the support page. Start with TBD: if the length is not final." }
+          - label: Groups
+            name: groups
+            widget: list
+            hint: "Orders, using the devices, warranty, safety."
+            fields:
+              - { label: Group title, name: title, widget: string, hint: "Group heading." }
+              - label: Questions
+                name: items
+                widget: list
+                hint: "Questions in this group."
+                fields:
+                  - { label: Question, name: q, widget: string, hint: "The question. Home picks some of these by exact text." }
+                  - { label: Answer, name: a, widget: text, hint: "The answer. Start with TBD: when a number is open." }
+
+  - name: compare
+    label: Compare
+    files:
+      - name: compare
+        label: Compare tables
+        file: src/content/compare.yaml
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Page heading." }
+          - { label: Description, name: description, widget: text, hint: "Search description." }
+          - { label: Intro, name: intro, widget: text, hint: "Text under the heading. No competitor names." }
+          - { label: Footnote, name: footnote, widget: text, hint: "Under the tables. Start the date with TBD: until it is checked." }
+          - label: Tables
+            name: tables
+            widget: list
+            hint: "One table per product."
+            fields:
+              - label: Product
+                name: product
+                widget: relation
+                collection: products
+                search_fields: [name]
+                value_field: "{{slug}}"
+                display_fields: [name]
+                hint: "Which product this table is for."
+              - label: Rows
+                name: rows
+                widget: list
+                hint: "Spec rows. Premium and budget are typical ranges, not brand names."
+                fields:
+                  - { label: Label, name: label, widget: string, hint: "Row name, such as Timer." }
+                  - { label: Good Hours, name: ours, widget: string, hint: "Our value. Start with TBD: if unconfirmed." }
+                  - { label: Typical premium, name: premium, widget: string, hint: "A typical range. Start with TBD: until checked." }
+                  - { label: Typical budget, name: budget, widget: string, hint: "A typical range. Start with TBD: until checked." }

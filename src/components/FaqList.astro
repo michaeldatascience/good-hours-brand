@@ -1,0 +1,30 @@
+---
+import Tbd from './Tbd.astro';
+
+interface Item {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: Item[];
+  draft: boolean;
+}
+
+const { items, draft } = Astro.props;
+---
+
+<div class="faq-list">
+  {
+    items.map((item) => (
+      <details>
+        <summary>
+          <Tbd value={item.q} draft={draft} />
+        </summary>
+        <p>
+          <Tbd value={item.a} draft={draft} />
+        </p>
+      </details>
+    ))
+  }
+</div>

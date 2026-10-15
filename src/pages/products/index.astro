@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import BundleCard from '../../components/BundleCard.astro';
+import Shot from '../../components/Shot.astro';
+import Price from '../../components/Price.astro';
+import Tbd from '../../components/Tbd.astro';
+import { getAccessories, getBundles, getProducts, getSettings } from '../../lib/catalog';
+import { needSections } from '../../lib/labels';
+
+const settings = await getSettings();
+const products = await getProducts();
+const bundles = (await getBundles()).filter((item) => item.data.status !== 'hidden');
+const accessories = (await getAccessories()).filter((item) => item.data.status === 'active');
+const coming = products.filter((item) => item.data.status === 'coming-soon');
+const draft = settings.draft;
+const anchors = [
+  ...needSections.map((section) => ({ href: `#${section.id}`, label: section.label })),
+  { href: '#bundles', label: 'Bundles' },
+  { href: '#accessories', label: 'Accessories' },
+  { href: '#coming-soon', label: 'Coming soon' },
+];
+---
+
+<Base title="Products" description="Red light, massage, and sleep gadgets from Good Hours. One-time prices, no subscription.">
+  <section class="section section-dark">
+    <div class="wrap stack">
+      <p class="eyebrow">Shop</p>
+      <h1>The gear</h1>
+      <p class="lede">Grouped by the moment you would use them. The same device can sit in more than one list.</p>
+      <nav class="anchor-row" aria-label="On this page">
+        {anchors.map((anchor) => <a href={anchor.href}>{anchor.label}</a>)}
+      </nav>
+    </div>
+  </section>
+
+  {
+    needSections.map((section, index) => {
+      const items = products.filter(
+        (product) => product.data.status === 'active' && product.data.needs.includes(section.need),
+      );
+      return (
+        <section id={section.id} class:list={['section', index % 2 === 0 ? 'section-light' : 'section-dark']}>
+          <div class="wrap stack">
+            <h2>{section.label}</h2>
+            <div class="grid-3">
+              {items.map((product) => <ProductCard product={product} draft={draft} />)}
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <section id="bundles" class="section section-light">
+    <div class="wrap stack">
+      <h2>Bundles</h2>
+      <div class="grid-2">
+        {bundles.map((bundle) => <BundleCard bundle={bundle} products={products} draft={draft} />)}
+      </div>
+    </div>
+  </section>
+
+  <section id="accessories" class="section section-dark">
+    <div class="wrap stack">
+      <h2>Accessories</h2>
+      <div class="grid-2">
+        {
+          accessories.map((item) => (
+            <article class="card mini-card">
+              <Shot image={item.data.image} alt={item.data.alt} shot={item.data.shot} draft={draft} shape="card" kind="generic" widths={[200, 400]} sizes="96px" />
+              <div>
+                <h3><a href="/accessories/">{item.data.name}</a></h3>
+                <p><Tbd value={item.data.summary} draft={draft} /></p>
+                <Price amount={item.data.price} />
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p><a href="/accessories/">All accessories</a></p>
+    </div>
+  </section>
+
+  <section id="coming-soon" class="section section-light">
+    <div class="wrap stack">
+      <h2>Coming soon</h2>
+      <div class="grid-3">
+        {coming.map((product) => <ProductCard product={product} draft={draft} />)}
+      </div>
+      {coming.length === 0 && <p class="muted">Nothing waiting in the wings.</p>}
+    </div>
+  </section>
+</Base>

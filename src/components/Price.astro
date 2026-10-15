@@ -1,0 +1,11 @@
+---
+import { formatUsd } from '../lib/format';
+
+interface Props {
+  amount?: number;
+}
+
+const { amount } = Astro.props;
+---
+
+{amount != null && <span class="price">{formatUsd(amount)}</span>}

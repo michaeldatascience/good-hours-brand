@@ -1,0 +1,31 @@
+name: Wind-down Kit
+status: active
+order: 2
+tagline: Everything for the last 20 minutes of your day.
+summary: Recovery Light and Heated Eye Mask. Red light first, warmth after. One kit price, no subscription.
+items:
+  - recovery-light
+  - heated-eye-mask
+price: 329
+buyUrl: ""
+images:
+  - alt: Wind-down Kit on a bedside table
+    shot: Recovery Light and eye mask on a bedside table, warm lamp, evening
+  - alt: Wind-down Kit packed for travel
+    shot: Both pieces in a carry-on, hotel room, evening light
+whyTogether:
+  - title: The last 20 minutes
+    text: Red light first, eye mask after. A simple order for the end of the day.
+  - title: Sized for a carry-on
+    text: Both pieces pack flat enough for a trip. Same routine in a hotel.
+  - title: You pay less
+    text: The kit price is lower than buying each one on its own.
+faq:
+  - q: What is in the kit?
+    a: The Recovery Light and the Heated Eye Mask.
+  - q: What order do I use them?
+    a: Light first, mask second, if you want both. The mask is the last step before sleep time.
+  - q: Do I need an app?
+    a: No. There is no app and no subscription.
+seoTitle: Wind-down Kit, light and eye mask
+seoDescription: Recovery Light and Heated Eye Mask for the last 20 minutes of the day. No subscription.
