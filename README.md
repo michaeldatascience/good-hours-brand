@@ -59,6 +59,22 @@ The first command downloads the tools. The second starts the site. Leave that wi
 
 Open [http://localhost:4321](http://localhost:4321). Stop the site later with Ctrl+C.
 
+## If it will not start again
+
+This is the usual case. The first copy is still running, so the second one has nowhere to sit.
+
+1. Look for the window where you already ran `npm run dev`. If it is still open, use that. Open [http://localhost:4321](http://localhost:4321). You only need one window.
+2. If the page will not load, the old copy is stuck. In PowerShell, run:
+
+```powershell
+Get-NetTCPConnection -LocalPort 4321 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
+npm run dev
+```
+
+3. If `npm run dev` prints a line about a content file, that file has a bad edit. The file name is in the message. Fix it, or get a fresh copy of that file from GitHub, then run `npm run dev` again.
+
+`npm run dev` now tells you when the site is already running, and it listens only on this computer. That avoids a Windows problem where the server dies after the network changes.
+
 ## Edit the words and photos
 
 1. With `npm run dev` still running, open [http://localhost:4321/admin/](http://localhost:4321/admin/) in **Chrome or Edge**. Firefox and Safari cannot use this editor.

@@ -45,7 +45,7 @@ export default defineConfig({
   trailingSlash: 'always',
   server: {
     port: 4321,
-    host: true,
+    host: '127.0.0.1',
   },
   integrations: [sitemap()],
   vite: {
